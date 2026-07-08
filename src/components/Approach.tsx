@@ -27,16 +27,16 @@ const POINTS = [
 
 export function Approach() {
   return (
-    <section id="approach" className="bg-white py-24">
+    <section id="approach" className="bg-surface py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-teal">
+          <span className="text-xs font-bold uppercase tracking-widest text-sky">
             The Approach
           </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-fg sm:text-4xl">
             Built, not decorated
           </h2>
-          <p className="mt-5 text-lg text-ink/70">
+          <p className="mt-5 text-lg text-fg/70">
             No stock circuit boards, no generic bootcamp curriculum. What makes the program
             distinctive:
           </p>
@@ -46,17 +46,17 @@ export function Approach() {
           {POINTS.map((p) => (
             <div key={p.title}>
               <div className="h-1 w-10 rounded-full bg-spark" />
-              <h3 className="mt-4 text-lg font-bold text-ink">{p.title}</h3>
-              <p className="mt-2 text-ink/65">{p.desc}</p>
+              <h3 className="mt-4 text-lg font-bold text-fg">{p.title}</h3>
+              <p className="mt-2 text-fg/65">{p.desc}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-16 rounded-2xl border border-teal/20 bg-teal/5 p-8 sm:p-10">
-          <h3 className="text-xl font-bold text-ink">
+        <div className="mt-16 rounded-2xl border border-sky/20 bg-sky/5 p-8 sm:p-10">
+          <h3 className="text-xl font-bold text-fg">
             Ownership over charity
           </h3>
-          <p className="mt-3 max-w-3xl text-ink/75">
+          <p className="mt-3 max-w-3xl text-fg/75">
             Participants own what they create in Chi-Spark AI programming, full stop — free to use
             it in portfolios, applications, and interviews. If an Incubator participant turns a
             project into a registered business, we negotiate a modest equity stake (roughly

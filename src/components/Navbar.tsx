@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Logo } from './Logo'
+import { ThemeToggle } from './ThemeToggle'
 
 const LINKS = [
   { href: '#programs', label: 'Programs' },
@@ -37,7 +38,7 @@ export function Navbar() {
               key={l.href}
               href={l.href}
               className={`text-sm font-medium transition-colors hover:text-spark ${
-                scrolled ? 'text-ink/80' : 'text-white/85'
+                scrolled ? 'text-fg/80' : 'text-white/85'
               }`}
             >
               {l.label}
@@ -49,37 +50,41 @@ export function Navbar() {
           >
             Get Involved
           </a>
+          <ThemeToggle scrolled={scrolled} />
         </div>
 
-        <button
-          className={`flex h-10 w-10 items-center justify-center rounded-full md:hidden ${
-            scrolled ? 'text-ink' : 'text-white'
-          }`}
-          onClick={() => setOpen((o) => !o)}
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          <span className="relative block h-4 w-5">
-            <span
-              className={`absolute left-0 top-0 h-0.5 w-5 bg-current transition-transform ${open ? 'translate-y-2 rotate-45' : ''}`}
-            />
-            <span className={`absolute left-0 top-1.5 h-0.5 w-5 bg-current transition-opacity ${open ? 'opacity-0' : ''}`} />
-            <span
-              className={`absolute left-0 top-3 h-0.5 w-5 bg-current transition-transform ${open ? '-translate-y-2 -rotate-45' : ''}`}
-            />
-          </span>
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle scrolled={scrolled} />
+          <button
+            className={`flex h-10 w-10 items-center justify-center rounded-full ${
+              scrolled ? 'text-fg' : 'text-white'
+            }`}
+            onClick={() => setOpen((o) => !o)}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            <span className="relative block h-4 w-5">
+              <span
+                className={`absolute left-0 top-0 h-0.5 w-5 bg-current transition-transform ${open ? 'translate-y-2 rotate-45' : ''}`}
+              />
+              <span className={`absolute left-0 top-1.5 h-0.5 w-5 bg-current transition-opacity ${open ? 'opacity-0' : ''}`} />
+              <span
+                className={`absolute left-0 top-3 h-0.5 w-5 bg-current transition-transform ${open ? '-translate-y-2 -rotate-45' : ''}`}
+              />
+            </span>
+          </button>
+        </div>
       </nav>
 
       {open && (
-        <div className="border-t border-ink/10 bg-paper md:hidden">
+        <div className="border-t border-fg/10 bg-paper md:hidden">
           <div className="flex flex-col gap-1 px-6 py-4">
             {LINKS.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-ink/5"
+                className="rounded-lg px-3 py-2.5 text-sm font-medium text-fg hover:bg-fg/5"
               >
                 {l.label}
               </a>

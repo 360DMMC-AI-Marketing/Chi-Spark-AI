@@ -26,13 +26,13 @@ export function Opportunity() {
     <section id="opportunity" className="bg-paper py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-teal">
+          <span className="text-xs font-bold uppercase tracking-widest text-sky">
             The Opportunity
           </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-fg sm:text-4xl">
             A widening AI divide, on top of a digital divide
           </h2>
-          <p className="mt-5 text-lg text-ink/70">
+          <p className="mt-5 text-lg text-fg/70">
             Chicago has made real progress closing its connectivity gap. But AI is opening a new
             one — and owning a device isn't the same as knowing how to use AI to learn, create,
             and earn.
@@ -41,10 +41,10 @@ export function Opportunity() {
 
         <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {STATS.map((s) => (
-            <div key={s.label} className="rounded-2xl border border-ink/10 bg-white p-6 shadow-sm">
+            <div key={s.label} className="rounded-2xl border border-fg/10 bg-surface p-6 shadow-sm">
               <div className="text-4xl font-extrabold tracking-tight text-spark">{s.value}</div>
-              <div className="mt-3 text-sm font-semibold text-ink">{s.label}</div>
-              <div className="mt-1.5 text-sm text-ink/60">{s.detail}</div>
+              <div className="mt-3 text-sm font-semibold text-fg">{s.label}</div>
+              <div className="mt-1.5 text-sm text-fg/60">{s.detail}</div>
             </div>
           ))}
         </div>

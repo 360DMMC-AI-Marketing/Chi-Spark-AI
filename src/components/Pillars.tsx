@@ -24,23 +24,23 @@ const PILLARS = [
     n: '04',
     title: 'Innovation',
     desc: "Fresh curriculum, new tools tracked — building things that didn't exist before.",
-    className: 'bg-teal text-white',
+    className: 'bg-flag-red text-white',
     numClass: 'text-white/25',
   },
 ]
 
 export function Pillars() {
   return (
-    <section className="bg-white py-24">
+    <section className="bg-surface py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-teal">
+          <span className="text-xs font-bold uppercase tracking-widest text-sky">
             The System
           </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-fg sm:text-4xl">
             Four pillars, <span className="font-serif-italic text-spark">one spark</span>
           </h2>
-          <p className="mt-5 text-lg text-ink/70">
+          <p className="mt-5 text-lg text-fg/70">
             Every activity, across both tracks, is designed to advance at least one of four
             pillars.
           </p>

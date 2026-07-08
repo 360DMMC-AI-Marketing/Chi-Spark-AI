@@ -32,13 +32,13 @@ export function Tracks() {
     <section id="programs" className="bg-paper py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-teal">
+          <span className="text-xs font-bold uppercase tracking-widest text-sky">
             Two Tracks, One Flame
           </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-fg sm:text-4xl">
             Programs built for where you're at
           </h2>
-          <p className="mt-5 text-lg text-ink/70">
+          <p className="mt-5 text-lg text-fg/70">
             Deep ink for the steady, structured Skills Track. Spark amber for the riskier,
             founder-energy Incubator. Every cohort touches all four pillars.
           </p>
