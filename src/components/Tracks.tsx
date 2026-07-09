@@ -10,7 +10,7 @@ const TRACKS = [
       'Resume and portfolio polish, interview practice',
       'Warm hand-offs to internships, employers, or post-secondary paths',
     ],
-    style: 'bg-gradient-to-br from-ink to-ink-dark',
+    style: 'bg-gradient-to-br from-ink to-ink-deep',
   },
   {
     eyebrow: 'Ages 18+ · No upper limit',

@@ -50,7 +50,7 @@ export function Opportunity() {
         </div>
 
         <div className="mt-14 rounded-2xl bg-ink px-8 py-10 text-center sm:px-16">
-          <p className="text-xl font-medium leading-relaxed text-white sm:text-2xl">
+          <p className="text-xl font-medium leading-relaxed text-sky sm:text-2xl">
             "Owning a device is not the same as knowing how to use AI to learn, create, and{' '}
             <span className="font-serif-italic text-spark">earn</span>."
           </p>

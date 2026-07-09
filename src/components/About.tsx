@@ -46,7 +46,7 @@ export function About() {
                     key={f.name}
                     className="flex items-center gap-3 rounded-xl border border-fg/10 bg-surface px-4 py-3"
                   >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-sm font-bold text-white">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-sm font-bold text-sky">
                       {f.name
                         .split(' ')
                         .map((p) => p[0])

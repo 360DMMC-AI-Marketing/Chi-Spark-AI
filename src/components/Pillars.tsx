@@ -5,13 +5,15 @@ const PILLARS = [
     desc: 'Industry-recognized certifications, resume and portfolio building, interview practice, and warm hand-offs into jobs.',
     className: 'bg-ink-dark text-white',
     numClass: 'text-white/20',
+    descClass: 'text-white/85',
   },
   {
     n: '02',
     title: 'Training',
     desc: 'LLM fundamentals, AI engineering, robotics and physical computing, data literacy, and AI security & safety — in cohorts with mentors.',
-    className: 'bg-ink text-white',
-    numClass: 'text-white/20',
+    className: 'bg-ink text-sky',
+    numClass: 'text-sky/30',
+    descClass: 'text-sky/85',
   },
   {
     n: '03',
@@ -19,6 +21,7 @@ const PILLARS = [
     desc: 'Idea validation, business fundamentals, mentorship, and a path from prototype to registered venture.',
     className: 'bg-spark text-white',
     numClass: 'text-white/30',
+    descClass: 'text-white/85',
   },
   {
     n: '04',
@@ -26,6 +29,7 @@ const PILLARS = [
     desc: "Fresh curriculum, new tools tracked — building things that didn't exist before.",
     className: 'bg-flag-red text-white',
     numClass: 'text-white/25',
+    descClass: 'text-white/85',
   },
 ]
 
@@ -51,7 +55,7 @@ export function Pillars() {
             <div key={p.n} className={`rounded-2xl p-8 ${p.className}`}>
               <div className={`text-5xl font-extrabold ${p.numClass}`}>{p.n}</div>
               <h3 className="mt-3 text-xl font-bold">{p.title}</h3>
-              <p className="mt-2 text-white/85">{p.desc}</p>
+              <p className={`mt-2 ${p.descClass}`}>{p.desc}</p>
             </div>
           ))}
         </div>

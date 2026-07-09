@@ -6,14 +6,21 @@
   --font-sans: "Poppins", system-ui, sans-serif;
   --font-serif: "Lora", Georgia, serif;
 
-  /* Fixed brand navy — used for permanently-dark blocks (hero, footer, track
-     cards, etc). Does not change between light/dark site mode. */
-  --color-ink: #12213b;
+  /* EXPERIMENT: Chicago Sky and Deep Ink swapped — the fully vivid Chicago
+     Sky now fills the permanently-dark brand blocks (hero, footer, track
+     cards, etc), at maximum visibility. Deep Ink becomes the readable text
+     color on top of it (rather than white), since white-on-vivid-sky fails
+     contrast — this makes ink a real, prominent secondary accent instead of
+     just small labels. ink-deep is a supporting shade used only where a
+     gradient needs to stay legible with white text. Revert by restoring the
+     original ink/sky values. */
+  --color-ink: #4fb8e8;
   --color-ink-dark: #0b1526;
+  --color-ink-deep: #1a5c82;
 
   --color-spark: #ff6b35;
   --color-spark-light: #ff8a5e;
-  --color-sky: #4fb8e8;
+  --color-sky: #12213b;
   --color-teal: #136f63;
   --color-flag-red: #c60c30;
 
