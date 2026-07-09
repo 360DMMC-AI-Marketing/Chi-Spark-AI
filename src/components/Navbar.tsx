@@ -29,7 +29,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#top" aria-label="Chi-Spark AI home">
-          <Logo variant={scrolled ? 'onLight' : 'onSky'} />
+          <Logo dark={!scrolled} />
         </a>
 
         <div className="hidden items-center gap-8 md:flex">
@@ -38,7 +38,7 @@ export function Navbar() {
               key={l.href}
               href={l.href}
               className={`text-sm font-medium transition-colors hover:text-spark ${
-                scrolled ? 'text-fg/80' : 'text-sky/85'
+                scrolled ? 'text-fg/80' : 'text-white/85'
               }`}
             >
               {l.label}
@@ -57,7 +57,7 @@ export function Navbar() {
           <ThemeToggle scrolled={scrolled} />
           <button
             className={`flex h-10 w-10 items-center justify-center rounded-full ${
-              scrolled ? 'text-fg' : 'text-sky'
+              scrolled ? 'text-fg' : 'text-white'
             }`}
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"

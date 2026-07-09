@@ -13,7 +13,7 @@ export function ThemeToggle({ scrolled }: { scrolled: boolean }) {
       className={`flex h-9 w-9 items-center justify-center rounded-full border transition-colors ${
         scrolled
           ? 'border-fg/15 text-fg hover:bg-fg/5'
-          : 'border-sky/30 text-sky hover:bg-sky/10'
+          : 'border-white/25 text-white hover:bg-white/10'
       }`}
     >
       {isDark ? (

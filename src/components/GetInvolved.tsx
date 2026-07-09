@@ -25,7 +25,7 @@ const CONTACT_EMAIL = 'hello@chisparkai.org'
 
 export function GetInvolved() {
   return (
-    <section id="get-involved" className="bg-ink py-24 text-sky">
+    <section id="get-involved" className="bg-ink py-24 text-white">
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl">
           <span className="text-xs font-bold uppercase tracking-widest text-sky">
@@ -34,7 +34,7 @@ export function GetInvolved() {
           <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
             Help us light the first spark
           </h2>
-          <p className="mt-5 text-lg text-sky/80">
+          <p className="mt-5 text-lg text-white/70">
             This is a founding-stage effort. Whatever you bring — time, a classroom, a network, or
             early funding — helps us get the first pilot off the ground.
           </p>
@@ -45,10 +45,10 @@ export function GetInvolved() {
             <a
               key={w.title}
               href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(w.subject)}`}
-              className="group rounded-2xl border border-sky/15 bg-white/40 p-7 transition-colors hover:border-spark/50 hover:bg-white/60"
+              className="group rounded-2xl border border-white/10 bg-white/5 p-7 transition-colors hover:border-spark/50 hover:bg-white/10"
             >
               <h3 className="text-lg font-bold">{w.title}</h3>
-              <p className="mt-2 text-sm text-sky/80">{w.desc}</p>
+              <p className="mt-2 text-sm text-white/70">{w.desc}</p>
               <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-spark">
                 Reach out
                 <span className="transition-transform group-hover:translate-x-1">→</span>

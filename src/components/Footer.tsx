@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="bg-ink-dark py-12 text-white/60">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 text-center sm:flex-row sm:justify-between sm:text-left">
-        <Logo variant="onDark" />
+        <Logo dark />
 
         <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
           <a href="#programs" className="hover:text-white">Programs</a>
