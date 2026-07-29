@@ -30,12 +30,12 @@ export function Opportunity() {
             The Opportunity
           </span>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-fg sm:text-4xl">
-            A widening AI divide, on top of a digital divide
+            The biggest buildout in history is hiring. Chicago's kids should be first in line
           </h2>
           <p className="mt-5 text-lg text-fg/70">
-            Chicago has made real progress closing its connectivity gap. But AI is opening a new
-            one — and owning a device isn't the same as knowing how to use AI to learn, create,
-            and earn.
+            AI is not just a software trend — it's the largest infrastructure buildout in human
+            history, creating careers from electricians to AI engineers. But the young people with
+            the least access risk being locked out of every layer of it.
           </p>
         </div>
 

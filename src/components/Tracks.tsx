@@ -1,21 +1,21 @@
 const TRACKS = [
   {
-    eyebrow: 'Ages 15–18 · In high school',
+    eyebrow: 'Starts here · Ages 15–18 · In high school',
     title: 'AI Skills Track',
-    desc: 'AI fluency, robotics, and work-readiness. Cohort-based, feeding existing internship and employment pipelines.',
+    desc: 'Our launch program. Teens rotate through all five career lanes — from circuits and hardware to LLMs and AI apps — then pick a direction.',
     bullets: [
-      'AI & LLM literacy, hands-on robotics and physical computing',
-      'Building and sharing real AI projects, plus AI ethics',
+      'Full-stack exposure: electronics, hardware, networks, LLMs, and AI applications',
+      'Building and sharing real AI + robotics projects, plus AI ethics',
       'Work-readiness: communication, reliability, teamwork',
       'Resume and portfolio polish, interview practice',
-      'Warm hand-offs to internships, employers, or post-secondary paths',
+      'Warm hand-offs to internships, trade pathways, employers, or post-secondary',
     ],
     style: 'bg-gradient-to-br from-ink to-ink-dark',
   },
   {
-    eyebrow: 'Ages 18+ · No upper limit',
+    eyebrow: 'Phase 2 · Ages 18+ · No upper limit',
     title: 'AI Incubator',
-    desc: 'Mentorship, workspace, and venture-building. Incubator-style, not a classroom.',
+    desc: 'Mentorship, workspace, and venture-building — with priority admission for Skills Track graduates. Incubator-style, not a classroom.',
     bullets: [
       'Applied AI engineering & robotics projects with a venture lens',
       '1:1 and group mentorship, plus workspace access',
@@ -36,11 +36,12 @@ export function Tracks() {
             Two Tracks, One Flame
           </span>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-fg sm:text-4xl">
-            Programs built for where you're at
+            High school first, ventures next
           </h2>
           <p className="mt-5 text-lg text-fg/70">
-            Deep ink for the steady, structured Skills Track. Spark amber for the riskier,
-            founder-energy Incubator. Every cohort touches all four pillars.
+            We launch with the Skills Track — high school is where the access gap is widest and
+            where intervention changes trajectories most. The Incubator follows, fed by our own
+            graduates. Every cohort touches all four pillars.
           </p>
         </div>
 

@@ -1,6 +1,7 @@
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
 import { Opportunity } from './components/Opportunity'
+import { FiveLayers } from './components/FiveLayers'
 import { Pillars } from './components/Pillars'
 import { Tracks } from './components/Tracks'
 import { Approach } from './components/Approach'
@@ -16,6 +17,7 @@ function App() {
       <main>
         <Hero />
         <Opportunity />
+        <FiveLayers />
         <Pillars />
         <Tracks />
         <Approach />
