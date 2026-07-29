@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-serif: "Lora", Georgia, serif;
+
+  /* Fixed brand navy — used for permanently-dark blocks (hero, footer, track
+     cards, etc). Does not change between light/dark site mode. */
+  --color-ink: #12213b;
+  --color-ink-dark: #0b1526;
+
+  --color-spark: #ff6b35;
+  --color-spark-light: #ff8a5e;
+  --color-sky: #4fb8e8;
+  --color-teal: #136f63;
+  --color-flag-red: #c60c30;
+
+  /* Theme-aware tokens — these flip under .dark */
+  --color-paper: #f7f4ec;
+  --color-surface: #ffffff;
+  --color-fg: #12213b;
+}
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+  --color-paper: #0d1b30;
+  --color-surface: #16263f;
+  --color-fg: #edf1f7;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-paper);
+  color: var(--color-fg);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::selection {
+  background: var(--color-spark);
+  color: white;
+}
+
+.font-serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+}
