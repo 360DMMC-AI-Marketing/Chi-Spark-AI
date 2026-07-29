@@ -8,6 +8,10 @@ const POINTS = [
     desc: 'Generative AI, the foundations of AI engineering, and hands-on robotics — so participants discover which lane excites them.',
   },
   {
+    title: 'Five layers, from the power up',
+    desc: 'Students learn what a data center is and how it is powered, cooled, and networked; build, tear down, and troubleshoot hardware in hands-on labs; and study circuits and power basics — before directing models and shipping applications.',
+  },
+  {
     title: 'Project- and portfolio-based',
     desc: 'Every participant leaves with things they made and can show — the most persuasive asset in an interview, application, or pitch.',
   },
