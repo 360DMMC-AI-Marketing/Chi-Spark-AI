@@ -1,14 +1,13 @@
-import sparkMark from '../assets/spark-mark.png'
-
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-ink pt-32 pb-24 text-white sm:pt-40 sm:pb-32">
       <img
-        src={sparkMark}
+        src="/images/chicago-dusk.jpg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute -right-16 -top-10 h-[26rem] w-auto opacity-[0.07] sm:h-[34rem]"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
       />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/80 to-ink" />
 
       <div className="relative mx-auto max-w-4xl px-6 text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-teal/60 bg-teal/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-sky">
