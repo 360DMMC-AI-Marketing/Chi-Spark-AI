@@ -9,10 +9,39 @@ const VALUES = [
 ]
 
 const FOUNDERS: { name: string; role: string; photo?: string }[] = [
-  { name: 'Dennis Cruz', role: 'Co-Founder' },
-  { name: 'Emilio Amar', role: 'Co-Founder', photo: '/founders/emilio-amar.jpg' },
-  { name: 'Daniel Díaz', role: 'Co-Founder' },
+  { name: 'Dennis Cruz', role: 'Co-Founder & Executive Director' },
+  { name: 'Emilio Amar', role: 'Co-Founder & Executive Director', photo: '/founders/emilio-amar.jpg' },
+  { name: 'Daniel Díaz', role: 'Co-Founder & Executive Director' },
 ]
+
+const BOARD: { name: string; role: string; photo?: string }[] = [
+  { name: 'Aymen Mohsni', role: 'Board Member', photo: '/founders/aymen-mohsni.png' },
+]
+
+function PersonCard({ p }: { p: { name: string; role: string; photo?: string } }) {
+  return (
+    <div className="flex items-center gap-3 rounded-xl border border-fg/10 bg-surface px-4 py-3">
+      {p.photo ? (
+        <img
+          src={p.photo}
+          alt={p.name}
+          className="h-12 w-12 rounded-full border border-fg/10 object-cover"
+        />
+      ) : (
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-sm font-bold text-white">
+          {p.name
+            .split(' ')
+            .map((n) => n[0])
+            .join('')}
+        </span>
+      )}
+      <div>
+        <div className="text-sm font-semibold text-fg">{p.name}</div>
+        <div className="text-xs text-fg/50">{p.role}</div>
+      </div>
+    </div>
+  )
+}
 
 export function About() {
   return (
@@ -43,33 +72,21 @@ export function About() {
               </h3>
               <div className="mt-4 flex flex-wrap gap-4">
                 {FOUNDERS.map((f) => (
-                  <div
-                    key={f.name}
-                    className="flex items-center gap-3 rounded-xl border border-fg/10 bg-surface px-4 py-3"
-                  >
-                    {f.photo ? (
-                      <img
-                        src={f.photo}
-                        alt={f.name}
-                        className="h-12 w-12 rounded-full border border-fg/10 object-cover"
-                      />
-                    ) : (
-                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-sm font-bold text-white">
-                        {f.name
-                          .split(' ')
-                          .map((p) => p[0])
-                          .join('')}
-                      </span>
-                    )}
-                    <div>
-                      <div className="text-sm font-semibold text-fg">{f.name}</div>
-                      <div className="text-xs text-fg/50">{f.role}</div>
-                    </div>
-                  </div>
+                  <PersonCard key={f.name} p={f} />
                 ))}
               </div>
+
+              <h3 className="mt-8 text-sm font-bold uppercase tracking-widest text-fg/50">
+                Board of Directors
+              </h3>
+              <div className="mt-4 flex flex-wrap gap-4">
+                {BOARD.map((b) => (
+                  <PersonCard key={b.name} p={b} />
+                ))}
+              </div>
+
               <p className="mt-4 text-sm text-fg/60">
-                We're actively recruiting founding board members —
+                We're actively recruiting additional founding board members —
                 nonprofit leadership, AI/tech, entrepreneurship, finance, fundraising, legal, and
                 lived experience of the communities we serve.
               </p>
