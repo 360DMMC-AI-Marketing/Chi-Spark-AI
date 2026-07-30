@@ -8,9 +8,9 @@ const VALUES = [
   'Evidence and accountability',
 ]
 
-const FOUNDERS = [
+const FOUNDERS: { name: string; role: string; photo?: string }[] = [
   { name: 'Dennis Cruz', role: 'Co-Founder' },
-  { name: 'Edmil Amar', role: 'Co-Founder' },
+  { name: 'Emilio Amar', role: 'Co-Founder', photo: '/founders/emilio-amar.jpg' },
   { name: 'Daniel Díaz', role: 'Co-Founder' },
 ]
 
@@ -47,12 +47,20 @@ export function About() {
                     key={f.name}
                     className="flex items-center gap-3 rounded-xl border border-fg/10 bg-surface px-4 py-3"
                   >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-sm font-bold text-white">
-                      {f.name
-                        .split(' ')
-                        .map((p) => p[0])
-                        .join('')}
-                    </span>
+                    {f.photo ? (
+                      <img
+                        src={f.photo}
+                        alt={f.name}
+                        className="h-12 w-12 rounded-full border border-fg/10 object-cover"
+                      />
+                    ) : (
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-sm font-bold text-white">
+                        {f.name
+                          .split(' ')
+                          .map((p) => p[0])
+                          .join('')}
+                      </span>
+                    )}
                     <div>
                       <div className="text-sm font-semibold text-fg">{f.name}</div>
                       <div className="text-xs text-fg/50">{f.role}</div>
