@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
 import { Opportunity } from './components/Opportunity'
@@ -12,8 +13,20 @@ import { GetInvolved } from './components/GetInvolved'
 import { Support } from './components/Support'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
+import { Portal } from './pages/Portal'
+
+function usePathname() {
+  const [path, setPath] = useState(window.location.pathname)
+  useEffect(() => {
+    const onNav = () => setPath(window.location.pathname)
+    window.addEventListener('popstate', onNav)
+    return () => window.removeEventListener('popstate', onNav)
+  }, [])
+  return path
+}
 
 function App() {
+  if (usePathname().startsWith('/portal')) return <Portal />
   return (
     <div className="min-h-screen bg-paper">
       <Navbar />

@@ -12,6 +12,7 @@ export function Footer() {
           <a href="#about" className="hover:text-white">About</a>
           <a href="#get-involved" className="hover:text-white">Get Involved</a>
           <a href="#contact" className="hover:text-white">Contact</a>
+          <a href="/portal" className="text-white/35 hover:text-white">Team login</a>
         </nav>
       </div>
 
