@@ -16,6 +16,7 @@ const FOUNDERS: { name: string; role: string; photo?: string }[] = [
 
 const BOARD: { name: string; role: string; photo?: string }[] = [
   { name: 'Aymen Mohsni', role: 'Board Member', photo: '/founders/aymen-mohsni.png' },
+  { name: 'Kevin Miske', role: 'Board Member' },
 ]
 
 function PersonCard({ p }: { p: { name: string; role: string; photo?: string } }) {
