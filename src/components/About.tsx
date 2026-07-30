@@ -11,6 +11,7 @@ const VALUES = [
 const FOUNDERS = [
   { name: 'Dennis Cruz', role: 'Co-Founder' },
   { name: 'Edmil Amar', role: 'Co-Founder' },
+  { name: 'Daniel Díaz', role: 'Co-Founder' },
 ]
 
 export function About() {
@@ -60,7 +61,7 @@ export function About() {
                 ))}
               </div>
               <p className="mt-4 text-sm text-fg/60">
-                We're actively recruiting a third co-founder and founding board members —
+                We're actively recruiting founding board members —
                 nonprofit leadership, AI/tech, entrepreneurship, finance, fundraising, legal, and
                 lived experience of the communities we serve.
               </p>
