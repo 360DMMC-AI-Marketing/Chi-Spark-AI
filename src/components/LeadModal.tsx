@@ -8,9 +8,10 @@ type Props = {
   type: LeadType
   title: string
   desc: string
+  prefill?: string
 }
 
-export function LeadModal({ open, onClose, type, title, desc }: Props) {
+export function LeadModal({ open, onClose, type, title, desc, prefill }: Props) {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') onClose()
@@ -41,7 +42,7 @@ export function LeadModal({ open, onClose, type, title, desc }: Props) {
         <h3 className="pr-8 text-xl font-bold text-fg">{title}</h3>
         <p className="mt-1.5 text-sm text-fg/60">{desc}</p>
         <div className="mt-6">
-          <LeadForm type={type} />
+          <LeadForm type={type} initialMessage={prefill} />
         </div>
       </div>
     </div>

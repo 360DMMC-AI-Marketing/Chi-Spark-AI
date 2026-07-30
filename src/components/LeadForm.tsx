@@ -4,10 +4,10 @@ import { submitLead, type LeadType } from '../lib/leads'
 const inputCls =
   'mt-1.5 w-full rounded-lg border border-fg/15 bg-paper px-4 py-2.5 text-fg outline-none focus:border-spark'
 
-export function LeadForm({ type }: { type: LeadType }) {
+export function LeadForm({ type, initialMessage }: { type: LeadType; initialMessage?: string }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState(initialMessage ?? '')
   const [company, setCompany] = useState('') // honeypot — humans never see this
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [error, setError] = useState('')
