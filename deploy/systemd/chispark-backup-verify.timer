@@ -1,0 +1,11 @@
+[Unit]
+Description=Weekly deep verification and restore test
+Documentation=https://github.com/360DMMC-AI-Marketing/Chi-Spark-AI/blob/main/deploy/README.md
+
+[Timer]
+OnCalendar=Sun *-*-* 05:00:00
+RandomizedDelaySec=30m
+Persistent=true
+
+[Install]
+WantedBy=timers.target

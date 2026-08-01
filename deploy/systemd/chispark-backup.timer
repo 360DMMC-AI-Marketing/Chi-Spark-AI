@@ -1,0 +1,14 @@
+[Unit]
+Description=Run the Chi-Spark AI backup nightly
+Documentation=https://github.com/360DMMC-AI-Marketing/Chi-Spark-AI/blob/main/deploy/README.md
+
+[Timer]
+OnCalendar=*-*-* 03:20:00
+# Spread the start a little so we are not hitting the storage API at the same
+# second as every other cron job on the internet.
+RandomizedDelaySec=20m
+# If the box was off at 03:20, run once it comes back rather than skipping.
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,15 @@
+[Unit]
+Description=Chi-Spark AI weekly deep backup verification
+Documentation=https://github.com/360DMMC-AI-Marketing/Chi-Spark-AI/blob/main/deploy/README.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/chispark-backup.sh --deep-check
+ExecStart=/usr/local/bin/chispark-restore.sh --verify
+User=root
+StandardOutput=journal
+StandardError=journal
+PrivateTmp=true
+NoNewPrivileges=true

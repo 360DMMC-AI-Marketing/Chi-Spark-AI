@@ -1,0 +1,18 @@
+[Unit]
+Description=Chi-Spark AI nightly backup
+Documentation=https://github.com/360DMMC-AI-Marketing/Chi-Spark-AI/blob/main/deploy/README.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/chispark-backup.sh
+User=root
+# Output goes to the journal: journalctl -u chispark-backup
+StandardOutput=journal
+StandardError=journal
+
+# The backup reads application data and writes only to staging and the remote.
+PrivateTmp=true
+ProtectHome=true
+NoNewPrivileges=true
