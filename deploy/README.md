@@ -140,16 +140,88 @@ silent, switch to the enforcing header and raise HSTS to a year.
 
 ## 3. Backups
 
-Nothing here is safe to automate until step 1 tells us what the database
-actually is. One thing worth knowing in advance: **if it is SQLite, do not back
-it up with `cp`.** Copying a live SQLite file mid-write produces a backup that
-restores to a corrupt database, and you generally find out on the day you need
-it. Use `sqlite3 <db> ".backup <dest>"` or `VACUUM INTO`, both of which take a
-consistent snapshot.
+Built and tested — see `scripts/` and `systemd/`. It discovers databases itself,
+so it works without us knowing yet exactly what is on the box.
 
-The target: nightly, encrypted, written somewhere that is not this VPS, and a
-restore actually performed once to prove the backup works. A backup that has
-never been restored is a hypothesis.
+**Why restic rather than a shell script that tars and encrypts:** restic gives
+you authenticated encryption, deduplication, retention pruning, and repository
+verification without anyone writing custom crypto. Deduplication is what makes
+nightly backups of a mostly-unchanged database nearly free — in testing, three
+full runs of a 300 KB database produced a 1.2 MB repository rather than three
+full copies.
+
+The one thing restic cannot do is take a *consistent* snapshot of a database
+that is being written to, so the script does that first:
+
+1. `sqlite3 .backup` each database into staging — never `cp`, which copies a
+   live file mid-transaction and restores to a corrupt database
+2. `PRAGMA integrity_check` the copy, so a bad backup fails loudly tonight
+   rather than silently in six months
+3. restic encrypts, deduplicates, and uploads staging plus the app files
+4. prune to the retention policy, then verify repository integrity
+5. wipe staging, which held plaintext participant data
+
+### Install
+
+```bash
+sudo apt-get install -y restic sqlite3
+sudo install -m 755 deploy/scripts/chispark-backup.sh  /usr/local/bin/
+sudo install -m 755 deploy/scripts/chispark-restore.sh /usr/local/bin/
+sudo install -D -m 600 deploy/scripts/backup.env.example /etc/chispark/backup.env
+sudo openssl rand -base64 48 | sudo tee /etc/chispark/restic-password >/dev/null
+sudo chmod 600 /etc/chispark/restic-password
+sudo nano /etc/chispark/backup.env      # APP_DIR + storage credentials
+```
+
+> **Copy the restic password somewhere off this server before the first run.**
+> restic encrypts client-side; there is no recovery path. If the server dies and
+> the only copy of the password died with it, every backup you have is
+> permanently unreadable. Password manager the founders can all reach, plus
+> paper. This is the single most common way backup projects fail.
+
+Create the repository, then take the first backup by hand and watch it:
+
+```bash
+set -a; . /etc/chispark/backup.env; set +a
+restic init
+sudo chispark-backup.sh
+```
+
+Prove it restores **before** trusting it:
+
+```bash
+sudo chispark-restore.sh --verify
+```
+
+Then enable the timers — nightly backup, weekly deep verification:
+
+```bash
+sudo cp deploy/systemd/chispark-backup*.{service,timer} /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now chispark-backup.timer chispark-backup-verify.timer
+systemctl list-timers 'chispark*'
+```
+
+### Checking on it
+
+```bash
+journalctl -u chispark-backup -n 50        # last run
+sudo chispark-restore.sh --list            # snapshots that exist
+sudo chispark-restore.sh --verify          # restore test, run monthly
+```
+
+`--verify` is the one that matters. A backup that has never been restored is a
+hypothesis, so the weekly timer runs a real restore and integrity-checks every
+database in it. The restore script never touches the live application — putting
+a restored database back into production is a decision a human makes with the
+service stopped, not something a script does while the app is mid-write.
+
+### Where backups go
+
+Anywhere that is not this VPS. A backup on the same disk as the thing it
+protects is not a backup. `backup.env.example` is set up for Cloudflare R2
+(no egress fees, roughly $0.015/GB/month — pennies at this data size); Backblaze
+B2 works identically.
 
 ---
 
