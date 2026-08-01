@@ -118,6 +118,7 @@ function limiter(max, windowMs) {
 const submitOk = limiter(5, 10 * 60 * 1000)   // public lead submissions
 const loginOk = limiter(10, 10 * 60 * 1000)   // portal login attempts
 const totpTry = limiter(8, 10 * 60 * 1000)    // TOTP / recovery attempts
+const legacyOk = limiter(20, 10 * 60 * 1000)  // legacy admin-token export
 
 // --- helpers ---------------------------------------------------------------
 const json = (res, code, obj, extraHeaders = {}) => {
@@ -164,6 +165,12 @@ function passwordOk(user, password) {
 }
 function audit(userId, event, ip) {
   db.prepare('INSERT INTO audit_log (user_id, event, ip) VALUES (?,?,?)').run(userId ?? null, event, ip)
+}
+function bearerOk(req, token) {
+  if (!token) return false
+  const a = Buffer.from(req.headers['authorization'] || '')
+  const b = Buffer.from(`Bearer ${token}`)
+  return a.length === b.length && crypto.timingSafeEqual(a, b)
 }
 
 // --- TOTP (RFC 6238, SHA-1, 30s step, 6 digits) ---------------------------
@@ -544,7 +551,8 @@ const server = http.createServer(async (req, res) => {
 
   // ---- legacy admin token export ----
   if (req.method === 'GET' && url.pathname === '/api/leads') {
-    if (!ADMIN_TOKEN || req.headers['authorization'] !== `Bearer ${ADMIN_TOKEN}`) {
+    if (!legacyOk(ip)) return json(res, 429, { ok: false, error: 'Too many attempts — try again shortly.' })
+    if (!bearerOk(req, ADMIN_TOKEN)) {
       return json(res, 401, { ok: false, error: 'Unauthorized' })
     }
     const rows = db.prepare('SELECT * FROM leads ORDER BY id DESC LIMIT 500').all()
