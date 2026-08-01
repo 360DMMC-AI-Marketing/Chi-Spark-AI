@@ -41,6 +41,14 @@ KEEP_MONTHLY="${KEEP_MONTHLY:-12}"
 [[ -r "$RESTIC_PASSWORD_FILE" ]] || die "password file not readable: $RESTIC_PASSWORD_FILE"
 command -v restic >/dev/null     || die "restic is not installed"
 
+# EXTRA_PATHS covers things that live outside the app directory but would still
+# hurt to lose — the nginx site config being the obvious one, since it is not in
+# git either. Space-separated in the config file.
+read -r -a extra_paths <<< "${EXTRA_PATHS:-}"
+for p in ${extra_paths[@]+"${extra_paths[@]}"}; do
+  [[ -e "$p" ]] || die "EXTRA_PATHS entry does not exist: $p"
+done
+
 # ------------------------------------------------------- single-run interlock
 # A second run starting while the first is mid-upload would fight over the
 # restic lock and leave the repo locked. flock makes the overlap impossible.
@@ -103,6 +111,7 @@ while IFS= read -r -d '' db; do
   log "sqlite: $name verified ok ($(du -h "$STAGING/db/$name" | cut -f1))"
   db_count=$((db_count + 1))
 done < <(find "$APP_DIR" -maxdepth 3 -type f \
+           -not -path '*/backups/*' -not -path '*/node_modules/*' \
            \( -name '*.db' -o -name '*.sqlite' -o -name '*.sqlite3' \) \
            ! -name '*-wal' ! -name '*-shm' -print0 2>/dev/null)
 
@@ -140,7 +149,7 @@ restic backup \
   --exclude "$APP_DIR/**/*.sqlite3" --exclude "$APP_DIR/*.sqlite3" \
   --exclude '*.db-wal' --exclude '*.db-shm' \
   --exclude-caches \
-  "$STAGING/db" "$APP_DIR" \
+  "$STAGING/db" "$APP_DIR" ${extra_paths[@]+"${extra_paths[@]}"} \
   || die "restic backup failed"
 
 # ------------------------------------------------------------------ retention
