@@ -12,6 +12,13 @@ export function Contact() {
           <p className="mt-5 text-lg text-fg/70">
             Questions, ideas, or an introduction to make? We'd love to hear from you.
           </p>
+          <p className="mt-3 text-lg text-fg/70">
+            Prefer to talk? Call us at{' '}
+            <a href="tel:+17739170291" className="font-semibold text-sky hover:underline">
+              (773) 917-0291
+            </a>
+            .
+          </p>
         </div>
 
         <div className="mt-10 rounded-2xl border border-fg/10 bg-surface p-8 shadow-sm">
