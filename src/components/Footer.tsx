@@ -1,5 +1,11 @@
 import { Logo } from './Logo'
 
+// Opens the Spark chat widget in AI voice mode (injected by the widget script)
+const openVoiceChat = () => {
+  const w = window as unknown as { __chiChatOpen?: (withVoice: boolean) => void }
+  if (w.__chiChatOpen) w.__chiChatOpen(true)
+}
+
 export function Footer() {
   return (
     <footer className="bg-ink-dark py-12 text-white/60">
@@ -21,7 +27,10 @@ export function Footer() {
       <div className="mx-auto mt-8 max-w-6xl border-t border-white/10 px-6 pt-6 text-center text-xs text-white/40 sm:text-left">
         <p>
           © {new Date().getFullYear()} Chi-Spark AI · Chicagoland, IL ·{' '}
-          <a href="tel:+17739170291" className="hover:text-white">(773) 917-0291</a>. "Chi-Spark AI" is a
+          <button type="button" onClick={openVoiceChat} className="hover:text-white">
+            (773) 917-0291
+          </button>
+          . "Chi-Spark AI" is a
           working name pending trademark &amp; availability check. A project in formation toward
           501(c)(3) status.
         </p>

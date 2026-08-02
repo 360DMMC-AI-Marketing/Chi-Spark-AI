@@ -1,5 +1,11 @@
 import { LeadForm } from './LeadForm'
 
+// Opens the Spark chat widget in AI voice mode (injected by the widget script)
+const openVoiceChat = () => {
+  const w = window as unknown as { __chiChatOpen?: (withVoice: boolean) => void }
+  if (w.__chiChatOpen) w.__chiChatOpen(true)
+}
+
 export function Contact() {
   return (
     <section id="contact" className="bg-paper py-24">
@@ -14,9 +20,13 @@ export function Contact() {
           </p>
           <p className="mt-3 text-lg text-fg/70">
             Prefer to talk? Call us at{' '}
-            <a href="tel:+17739170291" className="font-semibold text-sky hover:underline">
+            <button
+              type="button"
+              onClick={openVoiceChat}
+              className="font-semibold text-sky hover:underline"
+            >
               (773) 917-0291
-            </a>
+            </button>
             .
           </p>
         </div>
