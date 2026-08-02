@@ -9,14 +9,11 @@ const VALUES = [
 ]
 
 const FOUNDERS: { name: string; role: string; photo?: string }[] = [
-  { name: 'Dennis Cruz', role: 'Co-Founder & Executive Director' },
   { name: 'Emilio Amar', role: 'Co-Founder & Executive Director', photo: '/founders/emilio-amar.jpg' },
-  { name: 'Daniel Díaz', role: 'Co-Founder & Executive Director' },
 ]
 
 const BOARD: { name: string; role: string; photo?: string }[] = [
   { name: 'Aymen Mohsni', role: 'Board Member', photo: '/founders/aymen-mohsni.png' },
-  { name: 'Kevin Miske', role: 'Board Member' },
 ]
 
 function PersonCard({ p }: { p: { name: string; role: string; photo?: string } }) {
