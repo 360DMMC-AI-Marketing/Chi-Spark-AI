@@ -20,7 +20,8 @@ export function Footer() {
 
       <div className="mx-auto mt-8 max-w-6xl border-t border-white/10 px-6 pt-6 text-center text-xs text-white/40 sm:text-left">
         <p>
-          © {new Date().getFullYear()} Chi-Spark AI · Chicagoland, IL. "Chi-Spark AI" is a
+          © {new Date().getFullYear()} Chi-Spark AI · Chicagoland, IL ·{' '}
+          <a href="tel:+17739170291" className="hover:text-white">(773) 917-0291</a>. "Chi-Spark AI" is a
           working name pending trademark &amp; availability check. A project in formation toward
           501(c)(3) status.
         </p>
