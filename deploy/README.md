@@ -3,16 +3,16 @@
 Runbook for the founding team. Work top to bottom; each step is independent and
 safe to stop after.
 
-**Status as of 1 Aug 2026**
+**Status as of 5 Aug 2026**
 
 | Item | State |
 | --- | --- |
 | HTTPS on `chisparkai.org`, HTTP→HTTPS redirect | Done |
 | `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy` | Done |
 | API rejects unauthenticated requests (401) | Done |
-| Backend source under version control | **Not done — highest risk** |
-| HSTS, CSP, `Permissions-Policy` | Not done — step 2 |
-| Automated off-box backups | Unverified — step 3 |
+| Backend source under version control | Done — `server/server.mjs` |
+| HSTS, CSP, `Permissions-Policy` | Written + tested, not yet applied on the VPS — step 2 |
+| Automated backups | Written + tested, not yet installed — step 3. Local-only by choice (no off-box copy yet) |
 | Bare-IP HTTP bypass closed | Unverified — step 4 |
 | Managed auth (Clerk / Auth0) | Later, after the backend is reviewable |
 
@@ -218,10 +218,25 @@ service stopped, not something a script does while the app is mid-write.
 
 ### Where backups go
 
-Anywhere that is not this VPS. A backup on the same disk as the thing it
-protects is not a backup. `backup.env.example` is set up for Cloudflare R2
-(no egress fees, roughly $0.015/GB/month — pennies at this data size); Backblaze
-B2 works identically.
+`backup.env.example` defaults to a **local directory on this same VPS**
+(`/var/backups/chispark-restic`) — deliberately, so this can run without
+signing up for anything. Know what that does and doesn't buy you:
+
+- **Protects against:** an accidental delete, a bad deploy, a corrupted
+  database — restic keeps history to roll back to.
+- **Does not protect against:** this VPS's disk failing, the server being
+  compromised, or the box being lost outright. In every one of those cases
+  the backup dies together with the live data it was backing up, because
+  they're the same disk.
+- This box also runs other tenants' projects under separate Linux users.
+  restic encrypts the repository content either way, but `phase0-apply.sh`
+  locks the backup directory to `0700` root-only regardless, as defense in
+  depth.
+
+Upgrading to real off-box protection later needs no code changes — just
+uncomment one of the remote options in `backup.env.example` (Cloudflare R2,
+no egress fees, roughly $0.015/GB/month — pennies at this data size; or
+Backblaze B2, which works identically) and re-run `phase0-apply.sh`.
 
 ---
 

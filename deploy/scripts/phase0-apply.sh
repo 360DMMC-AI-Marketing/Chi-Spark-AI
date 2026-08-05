@@ -125,12 +125,25 @@ if [[ ! -f /etc/chispark/restic-password ]]; then
   echo ""
 fi
 
-if grep -q '<ACCOUNT_ID>' /etc/chispark/backup.env 2>/dev/null || grep -qE '^AWS_ACCESS_KEY_ID=\s*$' /etc/chispark/backup.env 2>/dev/null; then
-  echo "  STOPPING HERE — /etc/chispark/backup.env still has placeholder storage credentials."
-  echo "  Fill in RESTIC_REPOSITORY, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY (Cloudflare R2"
-  echo "  or Backblaze B2 — see deploy/README.md section 3), then re-run this script to"
-  echo "  finish: it will pick up from here and run restic init + the first backup."
-  exit 0
+REPO="$(grep '^RESTIC_REPOSITORY=' /etc/chispark/backup.env | head -1 | cut -d= -f2-)"
+LOCAL_REPO=0
+if [[ "$REPO" == s3:* || "$REPO" == b2:* ]]; then
+  if grep -q '<ACCOUNT_ID>' /etc/chispark/backup.env 2>/dev/null || grep -qE '^AWS_ACCESS_KEY_ID=\s*$' /etc/chispark/backup.env 2>/dev/null; then
+    echo "  STOPPING HERE — /etc/chispark/backup.env is set to remote storage but still has"
+    echo "  placeholder credentials. Fill in AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY (or the"
+    echo "  B2 equivalent) — see deploy/README.md section 3 — then re-run this script."
+    exit 0
+  fi
+elif [[ -z "$REPO" ]]; then
+  die "/etc/chispark/backup.env has no RESTIC_REPOSITORY set"
+else
+  # A local path. This box runs other tenants under separate Linux users, so
+  # even though restic encrypts the repository content, keep the directory
+  # itself root-only as defense in depth.
+  LOCAL_REPO=1
+  mkdir -p "$REPO"
+  chmod 700 "$REPO"
+  echo "  local backup directory ready -> $REPO (mode 700, root-only)"
 fi
 
 set -a
@@ -156,5 +169,12 @@ systemctl enable --now chispark-backup.timer chispark-backup-verify.timer
 systemctl list-timers 'chispark*'
 
 log "Phase 0 apply complete"
+if [[ $LOCAL_REPO -eq 1 ]]; then
+  echo "NOTE: backups are stored locally on this VPS ($REPO). That protects against"
+  echo "accidental deletion, bad deploys, and corruption — NOT against this server's"
+  echo "disk failing, being compromised, or the box being lost outright. Revisit"
+  echo "deploy/README.md section 3 whenever you want real off-box protection — no"
+  echo "script changes needed, just point RESTIC_REPOSITORY at a remote and re-run."
+fi
 echo "Still outstanding (different machine): check/close the :8888 bypass on"
 echo "the OLD VPS (2.25.167.45) — see deploy/README.md step 4."
